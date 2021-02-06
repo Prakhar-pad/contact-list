@@ -1,0 +1,74 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel='stylesheet' href='/css/home.css'>
+	</head>
+	<body>
+		<h2 id=page-heading>
+			<!-- <i class="fas fa-address-book"></i> -->
+			<i class="fa fa-address-book"></i>
+			My Contacts List
+		</h2>
+
+
+			
+		
+		<div id='contact-container'>	
+			
+		
+	
+		<% var num=1%>
+				
+		<% for (let i of Contact_List){ %>
+
+
+			<% if(i._id==locals.contactId){ %>
+				<div id='contact'>
+					<div class=num>
+						<%=num %>
+					</div>
+					<div class='name-phone'>
+						<!-- <span><%=i.name%></span>	
+						<span><%=i.phone%></span> -->
+						<form action='/update-contact/?id=<%=i._id%>' method='POST'>
+							<input type='text' name='name' value="<%=i.name%>">
+							<input type='number'  name='phone' value="<%=i.phone%>">
+							<button id='edit-submit' type="submit"><i class="fa fa-check"></i></button>
+						</form>
+							<a href='/'><i class="fa fa-times"></i></a>
+					</div>
+				</div>
+				
+			<%} else{%>
+
+				<div id='contact'>
+					<div class=num>
+						<%=num%>
+					</div>
+					<div class='name-phone'>
+						<span><%=i.name%></span>	
+						<span><%=i.phone%></span>
+					</div>
+					<div class='delete-button'>
+						<a href='delete-contact/?id=<%=i._id %>'>
+							<i class="fa fa-window-close"></i>
+						</a>
+					</div>
+					<div class='edit-button'>
+						<a href='edit-contact/?id=<%=i.id %>'>
+							<i class="fa fa-edit"></i>
+						</a>
+					</div>
+				</div>
+			<%num=num+1%>
+			<%}%>
+		<%}%>
+
+		<form action='/create-contact' method="POST">
+			<input type='text' placeholder="Enter Name" name='name' required>
+			<input type='number' placeholder="Enter phone No." name='phone' required>
+			<button type='submit'>Add Contact</button>
+		</form>
+			</div>
+	</body>
+</html>
